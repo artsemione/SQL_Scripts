@@ -1,0 +1,13 @@
+SELECT
+
+    CONVERT(varchar, EAT001.E3TimeStamp, 103) AS DATA
+  , DATENAME(WEEKDAY, E3TimeStamp) AS Dia
+	, ROUND(MIN(FTS001_TOT), 2) AS [00:00 h]
+	, ROUND(MAX(FTS001_TOT), 2) AS [23:59 h]
+	, ROUND((MAX(FTS001_TOT) - MIN(FTS001_TOT)), 2) AS [Total (m³)]
+	, ROUND(AVG(FTS001), 2) AS [Média Diária (l/s)]
+	, ROUND(MIN(FTS001), 3) AS [Vazão Mín (l/s)]
+  , ROUND((MIN(FTS001)/NULLIF(((MAX(FTS001_TOT) - MIN(FTS001_TOT))/24/3.6), 0))*100, 2) AS [Fator de Pesquisa] 
+
+FROM EAT001 
+GROUP BY EAT001.E3TimeStamp 
