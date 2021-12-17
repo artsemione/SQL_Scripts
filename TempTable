@@ -1,0 +1,20 @@
+DECLARE @FirstTable TABLE (RandomInteger FLOAT)
+DECLARE @SecondTable TABLE (RandomInteger INT)
+
+DECLARE @ii INT
+
+SET @ii = 1
+
+
+WHILE @ii < 30
+  BEGIN
+    INSERT  INTO @FirstTable
+    VALUES  (
+	(SELECT  ROUND(MIN(FTS001), 3) 
+  FROM    EAT017
+  WHERE   DATEPART(hh, E3TimeStamp) > 00 AND DATEPART(hh, E3TimeStamp) < 06 AND MONTH(E3TimeStamp) = 11 AND DAY(E3TimeStamp) = @ii)
+  )
+    SET @ii = @ii + 1
+  END
+
+  SELECT * FROM @FirstTable
