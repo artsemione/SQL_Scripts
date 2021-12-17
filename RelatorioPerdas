@@ -2,30 +2,54 @@
 
 SELECT 
 
- --DATENAME(WEEKDAY, E3TimeStamp)) AS Dia
+TB03.Data
+,TB03.[00:00 h]
+,TB03.[23:59 h]	
+,TB03.[Total (m³)]
+,TB03.[Média Diária (l/s)]
+,TB03.[Mín. Noturno (l/s)]
+,ROUND(TB03.[Mín. Noturno (l/s)]/TB03.Denom*100, 2)
+
+FROM 
+
+((SELECT TB01.Data, TB01.[00:00 h], TB01.[23:59 h], TB01.[Total (m³)],TB01.[Média Diária (l/s)], TB02.[Mín. Noturno (l/s)], TB01.Denom FROM 
+
+(SELECT 
+
 CONVERT(varchar, E3TimeStamp , 103) AS Data
 , ROUND(MIN(FTS001_TOT), 2) AS [00:00 h]
 , ROUND(MAX(FTS001_TOT), 2) AS [23:59 h]
 , ROUND((MAX(FTS001_TOT) - MIN(FTS001_TOT)), 2) AS [Total (m³)]
 , ROUND(AVG(FTS001), 3) AS [Média Diária (l/s)]
-,(
-  SELECT  ROUND(MIN(FTS001), 3) 
-  FROM    EAT017
-  WHERE   DATEPART(hh, E3TimeStamp) > 00 AND DATEPART(hh, E3TimeStamp) < 06 
-  ) AS [Vazão Mín (l/s)]
-
-, ROUND(
-( SELECT  MIN(FTS001) 
-  FROM    EAT017
-  WHERE   DATEPART(hh, E3TimeStamp) > 00 AND DATEPART(hh, E3TimeStamp) < 06 
-  )/(MAX(FTS001_TOT) - MIN(FTS001_TOT))*(1/24)*(1/3.6)*(100),2) AS [Fator de Pesquisa] 
+, ROUND((MAX(FTS001_TOT) - MIN(FTS001_TOT))/24/3.6, 2) AS [Denom]
 
 FROM EAT017 WHERE 
 
-DATEPART(hh, E3TimeStamp) > 00 
-AND DATEPART(hh, E3TimeStamp) < 06 
-AND MONTH(E3TimeStamp) = 12
+MONTH(E3TimeStamp) = 12
 AND FTS001 > 0
 AND FTS001_TOT > 0
 
-GROUP BY CONVERT(varchar, E3TimeStamp, 103) 
+GROUP BY CONVERT(varchar, E3TimeStamp, 103)) TB01
+
+INNER JOIN
+
+(SELECT 
+
+CONVERT(varchar, E3TimeStamp , 103) AS Data
+,ROUND(MIN(FTS001), 3) AS [Mín. Noturno (l/s)]
+
+FROM EAT017 
+
+WHERE 
+	DATEPART(hh, E3TimeStamp) > 00 
+	AND DATEPART(hh, E3TimeStamp) < 06 
+	AND MONTH(E3TimeStamp) = 12
+	AND FTS001 > 0
+	AND FTS001_TOT > 0
+
+GROUP BY CONVERT(varchar, E3TimeStamp, 103)) TB02 ON TB01.Data = TB02.Data)) AS TB03
+
+
+
+
+
