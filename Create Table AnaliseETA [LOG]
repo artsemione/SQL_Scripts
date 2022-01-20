@@ -1,7 +1,7 @@
 CREATE TABLE LOGAnaliseRotinaETA(
 	DBTimeStamp SmallDateTime PRIMARY KEY,
   Id INT,
-  User VARCHAR(20),
+  Usuario VARCHAR(20),
   Data SMALLDATETIME,
 	Turb_AB DECIMAL(4, 2), 
 	pH_AB DECIMAL(4, 2), 
