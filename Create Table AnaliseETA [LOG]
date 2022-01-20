@@ -2,7 +2,7 @@ CREATE TABLE LOGAnaliseRotinaETA(
 	DBTimeStamp SmallDateTime PRIMARY KEY,
   Id INT,
   Usuario VARCHAR(20),
-  Data SMALLDATETIME,
+  Data SMALLDATETIME DEFAULT(getdate()),
 	Turb_AB DECIMAL(4, 2), 
 	pH_AB DECIMAL(4, 2), 
 	Turb_AD DECIMAL(4, 2), 
