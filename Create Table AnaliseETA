@@ -1,6 +1,6 @@
 CREATE TABLE AnaliseRotinaETA(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	DBTimeStamp SmallDateTime DEFAULT(getdate()),
+	Hora datetime2(0) DEFAULT(getdate()),
 	Turb_AB decimal(4, 2), 
 	pH_AB decimal(4, 2), 
 	Turb_AD decimal(4, 2), 
