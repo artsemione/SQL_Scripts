@@ -1,0 +1,5 @@
+
+Hora            = flow.get("HoraAnaliseETA") + ":00"    // Hora no formato hh:mm:ss
+Data            = "CAST((CONVERT(VARCHAR(10), GETDATE(), 120)) AS VARCHAR(10)) +' '+'"+ Hora +"'"    // Data no formato "aaaa-mm-dd hh:mm:ss"
+
+"INSERT INTO [DBAnalises].[dbo].[AnaliseRotinaETA](Hora, Turb_AB, pH_AB, Turb_AD, pH_AD, F1_TAF, F2_TAF, F3_TAF, F4_TAF, F5_TAF, F6_TAF, F7_TAF, F8_TAF ,F9_TAF, F10_TAF, F11_TAF, Turb_AT, Cor_AT, pH_AT, Fluor_AT, Cloro_AT) VALUES (" + Data + ", " + AB_Turb + ", " + AB_pH + ", " + AD_Turb + ", " + AD_pH + ", " + F1_TAF + ", " + F2_TAF + ", " + F3_TAF + ", " + F4_TAF + ", " + F5_TAF + "," + F6_TAF + ", " + F7_TAF + ", " + F8_TAF + "," + F9_TAF + ", " + F10_TAF + ", " + F11_TAF + "," + AT_Turb + "," + AT_Cor + "," + AT_pH + "," + AT_Fluor + "," + AT_Cloro + ")"
