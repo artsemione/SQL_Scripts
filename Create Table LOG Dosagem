@@ -1,5 +1,5 @@
 CREATE TABLE LOGDosagem(
-	DBTimeStamp datetime2 PRIMARY KEY,
+	DBTimeStamp datetime2 PRIMARY KEY DEFALT(getdate()),
 	Usuario VARCHAR(20),
   	Id INT,
  	Event VARCHAR(20),
