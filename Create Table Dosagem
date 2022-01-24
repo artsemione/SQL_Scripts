@@ -1,16 +1,16 @@
 CREATE TABLE Dosagem(
-	
+
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Hora datetime2(0) DEFAULT(getdate()),
+	Hora datetime2(0),
 	Vazao decimal(3, 0),
   	Sulfato decimal(3, 0), 
   	[Sulfato%] decimal(3, 0), 
   	GCP decimal(3, 0),
   	[GCP%] decimal(3, 1),
   	GCS decimal(3, 0),
+	[GCS%] decimal(3, 1),
   	Fluor decimal(3, 0),
   	[Fluor%] decimal(3, 1),
   	Cloro decimal(3, 0),
-  	ChkLst VARCHAR(1),
   	Operador VARCHAR(20)
 );
