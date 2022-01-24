@@ -1,5 +1,5 @@
 CREATE TABLE LOGAnaliseRotinaETA(
-	DBTimeStamp SmallDateTime PRIMARY KEY,
+	DBTimeStamp datetime2 PRIMARY KEY DEFAULT(getdate()),
 	Usuario VARCHAR(20),
   	Id INT,
  	Event VARCHAR(20),
