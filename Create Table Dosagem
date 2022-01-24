@@ -4,7 +4,7 @@ CREATE TABLE Dosagem(
 	Hora datetime2(0),
 	Vazao decimal(3, 0),
   	Sulfato decimal(3, 0), 
-  	[Sulfato%] decimal(3, 0), 
+  	[Sulfato%] decimal(3, 1), 
   	GCP decimal(3, 0),
   	[GCP%] decimal(3, 1),
   	GCS decimal(3, 0),
